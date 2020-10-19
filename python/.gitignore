@@ -1,0 +1,5 @@
+*.pyc
+*.txt
+pooling.py
+config.config
+__pycache__
