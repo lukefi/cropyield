@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Usage &mdash; Cropyield 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Cropyield 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Additional scripts" href="Additional.html" />
+    <link rel="prev" title="Preparation" href="Preparation.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body role="document">
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Additional.html" title="Additional scripts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Preparation.html" title="Preparation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cropyield 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="expected-inputs">
+<h2>Expected Inputs<a class="headerlink" href="#expected-inputs" title="Permalink to this headline">¶</a></h2>
+<p>The main input to the code are a folder with Sentinel-2 data (in .SAFE format) and a folder with shapefiles that are split based on S2 tiles (for this splitshp.py can be run beforehand. see ref{split** for naming). The S2 folder can have all data that needs to be processed or more. If more, start and enddate of the timeframe of interest can be given to limit the data that is being processed.</p>
+</div>
+<div class="section" id="expected-outputs">
+<h2>Expected Outputs<a class="headerlink" href="#expected-outputs" title="Permalink to this headline">¶</a></h2>
+<p>Output of the process are csv files. There will be two csv files, one starting with array, one with meta per processed tile, date and band (default: 2,3,4,5,6,7,8,8A,11,12). The array file contains as many lines as there is unique IDs in the input shapefile per tile. Each line starting with the ID followed by numbers indicating the raw pixel values for the fieldparcel with that ID. The metadata file contains the ID, year, DOY, the tilefilename of S2 tile, missionID (S2A or S2B) and the count of pixel values.</p>
+</div>
+<div class="section" id="running-the-scripts-as-puhti-array-job">
+<h2>Running the scripts as Puhti array job<a class="headerlink" href="#running-the-scripts-as-puhti-array-job" title="Permalink to this headline">¶</a></h2>
+<p>The scripts can be run in parallel using Puhti array jobs. To do this, follow the steps below:</p>
+<ol class="arabic">
+<li><p class="first">clone or copy code to Puhti <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">*repository</span> <span class="pre">link*</span></code></p>
+</li>
+<li><p class="first">create results folder where all results will be stored (later called <strong>projectpath</strong>)</p>
+</li>
+<li><p class="first">update paths and variables in config.config (no spaces between = and texts, no &#8216; or &#8221;, upper-/lowecase matters)</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>startdate</strong> for the time interval of interest (format: YYYYMMDD, eg startdate=20180418 is April, 18th in 2018)</li>
+<li><strong>enddate</strong> for the time interval of interest (format: YYYYMMDD)</li>
+<li><strong>datapath</strong> is the path where the S2 data (as .SAFE s) is stored on Puhti, eg datapath=/scratch/project_2001107/S2L2A_2018</li>
+<li><strong>projectpath</strong> is the path to where the results shall be stored (results folder created in 2.)</li>
+<li><strong>shppath</strong> is the path to where the shapefiles per tile are stored (specified when running splitshp.py)</li>
+<li><strong>idname</strong> is the name the ID-field has in the shapefile, eg idname=PlotID</li>
+<li><strong>puhtiproject</strong> is the name of the billing project for the array jobs, eg puhtiproject=project_2001106</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">bash</span> <span class="pre">start_puhti.sh</span></code> runs all scripts and outputs 2 csv files per band per tile per timepoint (one with arrays, one with metadata)</p>
+</li>
+<li><p class="first">check that outputs have been processed</p>
+</li>
+</ol>
+<p>This process will create one folder for each process with a copy of the shapefile. These folders are not deleted by default, since this step can go horribly wrong. Suggestion would be to delete them manually after the jobs are done. If automatic deletion is wished. <code class="docutils literal"><span class="pre">os.remove(jobdir)</span></code> can be inserted into arrayextractor.py at line 88 (as part of to_csv function. Handle with care.\</p>
+<p>After test running this script on Puhti actual usage of time and memory should be checked. Best to test with biggest shapefile possible. Time is set to 30 min per job as default. Memory default is 12MB. These can be changed in script puhti_array.sh in line 5 for time (#SBATCH &#8211;time=00:30:00) and line 7 for memory (in kb; #SBATCH &#8211;mem-per-cpu=12000). Every job produces one output and one error file, these can be helpful when finding out why things went wrong if they do. However, when running a high amount of jobs, a lot of files are produced in the code directory. In line 3 and 4 the names for these files are defined. They can also be directed to a different directory which can be deleted more easily after everyhting went fine. It is also possible to not produce these files. See <a class="reference external" href="https://docs.csc.fi/computing/running/getting-started/">https://docs.csc.fi/computing/running/getting-started/</a> for more information.</p>
+</div>
+<div class="section" id="running-the-scripts-non-parallel">
+<h2>Running the scripts non-parallel<a class="headerlink" href="#running-the-scripts-non-parallel" title="Permalink to this headline">¶</a></h2>
+<p>To run the scripts non parallel eg on workstation, follow the steps below:</p>
+<ol class="arabic">
+<li><p class="first">clone or copy the code to the computer</p>
+</li>
+<li><p class="first">create results folder where all results will be stored (later called <strong>projectpath</strong>)</p>
+</li>
+<li><p class="first">create anaconda environment and enter it</p>
+</li>
+<li><p class="first">update paths and variables in config.config (no spaces between = and texts, no &#8216; or &#8221;, upper-/lowecase matters)</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>startdate</strong> for the time interval of interest (format: YYYYMMDD, eg startdate=20180418 is April, 18th in 2018)</li>
+<li><strong>enddate</strong> for the time interval of interest (format: YYYYMMDD)</li>
+<li><strong>datapath</strong> is the path where the S2 data is stored , eg datapath=/home/Documents/S2L2A_2018</li>
+<li><strong>projectpath</strong> is the path to where the results shall be stored (results folder created in 2.)</li>
+<li><strong>shppath</strong> is the path to where the shapefiles per tile are stored</li>
+<li><strong>idname</strong> is the name the ID-field has in the shapefile, eg idname=PlotID</li>
+<li><strong>puhtiproject</strong> can remain empty</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">bash</span> <span class="pre">start.sh</span></code> runs all scripts and outputs 2 csv files per band per tile per timepoint (one with arrays, one with metadata)</p>
+</li>
+<li><p class="first">check that outputs have been processed</p>
+</li>
+</ol>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>Check carefully, that all steps above have been implemented depending on the way how the script is run (parallel/non-parallel).</p>
+<div class="line-block">
+<div class="line">S1 file cannot be read:
+* Check that path and filename are correct, and the file exists (&gt;0kB), otherwise download again.</div>
+</div>
+<div class="line-block">
+<div class="line">Arrayextractor output is empty:
+* Check that the shapefile overlaps with the tile in question.</div>
+</div>
+<div class="line-block">
+<div class="line">Arrayextractor/Statistics results are all zero/NaN:
+* Check that the shapefile overlaps with the tile in question and there is data in the area of the shapefile.</div>
+</div>
+<p>Contact <a class="reference external" href="mailto:samantha&#46;wittke&#37;&#52;&#48;nls&#46;fi">samantha<span>&#46;</span>wittke<span>&#64;</span>nls<span>&#46;</span>fi</a> if other problems arise.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#expected-inputs">Expected Inputs</a></li>
+<li><a class="reference internal" href="#expected-outputs">Expected Outputs</a></li>
+<li><a class="reference internal" href="#running-the-scripts-as-puhti-array-job">Running the scripts as Puhti array job</a></li>
+<li><a class="reference internal" href="#running-the-scripts-non-parallel">Running the scripts non-parallel</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Preparation.html"
+                        title="previous chapter">Preparation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Additional.html"
+                        title="next chapter">Additional scripts</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Additional.html" title="Additional scripts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Preparation.html" title="Preparation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cropyield 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2020, Samantha Wittke.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
