@@ -7,7 +7,7 @@ BigDataEO project code
 This documentation describes the content and usage of the code written for the cropyield project by the 
 Finnish Geospatial Research Institute, `FGI <https://www.maanmittauslaitos.fi/en/research/departments/remote-sensing-and-photogrammetry>`_ from 2018 until 2020 as a subcontractor for the Natural Ressources Institute of Finland (LUKE).
 The code is prepared according to algorithm descriptions made by LUKE (see Appendix).
-The data used in this project is classified but this documentation also describes the necessary content of each datafile.
+Some files used in this project are classified but this documentation also describes the necessary content of each datafile.
 
 
 Contents:
