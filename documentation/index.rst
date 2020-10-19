@@ -9,6 +9,7 @@ Finnish Geospatial Research Institute, `FGI <https://www.maanmittauslaitos.fi/en
 The code is prepared according to algorithm descriptions made by LUKE (see Appendix).
 The data used in this project is classified but this documentation also describes the necessary content of each datafile.
 
+
 Contents:
 
 .. toctree::
@@ -17,7 +18,6 @@ Contents:
    Preparation
    Usage
    Additional
-   License
    Appendix
 
 
