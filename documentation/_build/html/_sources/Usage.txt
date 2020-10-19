@@ -4,7 +4,7 @@ Usage
 Expected Inputs
 ----------------
 
-The main input to the code are a folder with Sentinel-2 data (in .SAFE format) and a folder with shapefiles that are split based on S2 tiles (for this splitshp.py can be run beforehand. see \ref{split** for naming). The S2 folder can have all data that needs to be processed or more. If more, start and enddate of the timeframe of interest can be given to limit the data that is being processed.
+The main input to the code are a folder with Sentinel-2 data (in .SAFE format) and a folder with shapefiles that are split based on S2 tiles (for this splitshp.py can be run beforehand). The S2 folder can have all data that needs to be processed or more. If more, start and enddate of the timeframe of interest can be given to limit the data that is being processed.
 
 Expected Outputs
 ----------------
@@ -53,6 +53,7 @@ To run the scripts non parallel eg on workstation, follow the steps below:
     * **shppath** is the path to where the shapefiles per tile are stored
     * **idname** is the name the ID-field has in the shapefile, eg idname=PlotID
     * **puhtiproject** can remain empty
+    
 5. ``bash start.sh`` runs all scripts and outputs 2 csv files per band per tile per timepoint (one with arrays, one with metadata)
 6. check that outputs have been processed
 
@@ -71,5 +72,5 @@ Check carefully, that all steps above have been implemented depending on the way
 | Arrayextractor/Statistics results are all zero/NaN:
     * Check that the shapefile overlaps with the tile in question and there is data in the area of the shapefile.
 
-Contact samantha.wittke@nls.fi if other problems arise.
+Also check python packages webpages for more specific problems.
 

@@ -28,7 +28,6 @@ Workstation
 * fiona
 
 
-
 Some of above mentioned are not default libraries and have to be installed separately.
 Creating an anaconda environment is suggested. A .yml file is included in the package of which a new environment can be created. 
 
