@@ -11,18 +11,19 @@ Expected Outputs
 
 Output of the process are csv files. There will be two csv files, one starting with array, one with meta per processed tile, date and band (default: 2,3,4,5,6,7,8,8A,11,12). The array file contains as many lines as there is unique IDs in the input shapefile per tile. Each line starting with the ID followed by numbers indicating the raw pixel values for the fieldparcel with that ID. The metadata file contains the ID, year, DOY, the tilefilename of S2 tile, missionID (S2A or S2B) and the count of pixel values.
 
+
 Running the scripts as Puhti array job
 ---------------------------------------
 
 The scripts can be run in parallel using Puhti array jobs. To do this, follow the steps below:
 
-1. clone or copy code to Puhti ``git clone *repository link*``
+1. clone or copy code to Puhti ``git clone 'repository link'``
 2. create results folder where all results will be stored (later called **projectpath**)
 3. update paths and variables in config.config (no spaces between = and texts, no ' or ", upper-/lowecase matters)
 
     * **startdate** for the time interval of interest (format: YYYYMMDD, eg startdate=20180418 is April, 18th in 2018)
     * **enddate** for the time interval of interest (format: YYYYMMDD)
-    * **datapath** is the path where the S2 data (as .SAFE s) is stored on Puhti, eg datapath=/scratch/project\_2001107/S2L2A\_2018
+    * **datapath** is the path where the Sentinel-2 data (as .SAFE s) is stored on Puhti, eg datapath=/scratch/project\_2001107/S2L2A\_2018
     * **projectpath** is the path to where the results shall be stored (results folder created in 2.)
     * **shppath** is the path to where the shapefiles per tile are stored (specified when running splitshp.py)
     * **idname** is the name the ID-field has in the shapefile, eg idname=PlotID
@@ -63,7 +64,7 @@ Troubleshooting
 
 Check carefully, that all steps above have been implemented depending on the way how the script is run (parallel/non-parallel).
 
-| S1 file cannot be read: 
+| Rasterfile cannot be read: 
     * Check that path and filename are correct, and the file exists (>0kB), otherwise download again.
 
 | Arrayextractor output is empty:

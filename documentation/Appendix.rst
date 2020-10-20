@@ -2,7 +2,7 @@ Appendix
 ========
 
 Updated algorithm 21.04.20 provided by LUKE
-------------------------------------------
+--------------------------------------------
 
 :download:`Updated Algorithm <Cropyield_algorithm_update.pdf>`
 
