@@ -2,7 +2,7 @@
    sphinx-quickstart on Fri Oct  9 18:31:21 2020.
 
 Cropyield project WP1 code documentation
-=====================================
+=========================================
 
 Documentation for `this <https://github.com/myliheik/cropyield>`_ code.
 
