@@ -1,4 +1,5 @@
-
+Introduction
+============
 
 In this task, raster data from Copernicus Sentinel-2 Level 2A tiles are processed to 
 machine learning ready time series data. The tentative and updated algorithms can be 
