@@ -1,6 +1,5 @@
 alabaster==0.7.12
 anaconda-client==1.2.2
-anaconda-navigator==1.9.6
 anaconda-project==0.8.3
 argon2-cffi @ file:///tmp/build/80754af9/argon2-cffi_1596828452693/work
 asn1crypto @ file:///tmp/build/80754af9/asn1crypto_1596577642040/work
