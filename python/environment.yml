@@ -105,5 +105,5 @@ dependencies:
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
   - zstd=1.4.4=h6597ccf_3
-prefix: /u/58/wittkes3/unix/anaconda3/envs/cropyield
+
 
