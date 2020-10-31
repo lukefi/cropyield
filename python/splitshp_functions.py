@@ -86,6 +86,12 @@ def write_splitted_shapefiles(bounding_box_small_poly_shp,tile,outshpdir, small_
                             outputshp.write({                                 
                                 'properties': small_polygon['properties'], 
                                 'geometry': small_polygon['geometry']})
+                                        # if the shp is only 100 bytes it is empty and can be deleted
+            if os.path.getsize(outshpname) == 100:
+                filename = os.path.splitext(outshpname)[0]
+                for ext in ['.shp','.shx','.dbf','.prj','.cpg']:
+                    if os.path.exists(filename + ext):
+                        os.remove(filename + ext)
 
 def extract_needed_tiles(small_poly_shp, large_poly_shp, outshpname):
 
