@@ -13,7 +13,7 @@ module load geoconda
 
 name=$(sed -n ${SLURM_ARRAY_TASK_ID}p bandpaths.txt)
 
-srun python arrayextractor.py -f $name -shp $shppath -p $projectpath -jn ${SLURM_ARRAY_TASK_ID} -id $idname
+python arrayextractor.py -f $name -shp $shppath -p $projectpath -jn ${SLURM_ARRAY_TASK_ID} -id $idname
 
 rm -rf $projectpath/${SLURM_ARRAY_TASK_ID}
 
