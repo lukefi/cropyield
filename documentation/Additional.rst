@@ -1,11 +1,11 @@
 Additional scripts
 ==================
 
-splitshp.py
+splitshp_x.py
 ------------
 
 
-This script has to be run separately before running the main script (above) if only one huge shapefile is available. It takes three input arguments which are given as command line arguments.
+This script has to be run separately before running the main script if only one huge shapefile with field parcels is available. It takes three input arguments which are given as command line arguments.
 The script will take the input shapefile that spreads over multiple Sentinel-2 tiles and split the shapefile into several per tile shapefiles.
 All polygons that are intersecting a tile will be part of the new tile based shapefile.
 The script is called with 
@@ -27,9 +27,11 @@ When not using the splitshp.py for splitting, it is essential that the last part
 
 In some cases it may make sense to first subset the shapefile with the worldwide tiles to the area of interest.
 For this the script ``splitshp_world.py`` can be used. It takes 3 input parameters:
-``pyhton splitshp_world.py [1] [2] [3]``
-* [1] a shapefile with polygon/s covering the area of interest
-* [2] the shapefile with all Sentinel-2 tiles 
+
+|``pyhton splitshp_world.py [1] [2] [3]``
+
+* [1] a shapefile with polygon/s covering the area of interest,
+* [2] the shapefile with all Sentinel-2 tiles ,
 * [3] output directory where the subset shapefile should be stored
 
 The resulting shapefile will have the name of the full world sentinel-2 shapefile + _ + name of the file covering the area of interest.
