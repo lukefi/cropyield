@@ -7,5 +7,5 @@ Please refer to the [documentation](https://cropyield.readthedocs.io/en/latest/)
 
 Author: Finnish Geospatial Research Institute (Samantha Wittke)
 
-Latest updates: 20.10.2020
+Latest updates: 18.02.21
 
