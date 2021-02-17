@@ -18,7 +18,7 @@ The script is called with
 
 | Example call:  
 
-``python splitshp_mp.py /home/samu/Documents/cropyield/cropyield.shp /home/samu/Documents/cropyield/Sentinel2_tiles_world.shp /home/samu/Documents/cropyield/results``
+``python splitshp_mp.py /home/user/Documents/cropyield/cropyield.shp /home/user/Documents/cropyield/Sentinel2_tiles_world.shp /home/user/Documents/cropyield/results``
 
 Internally, the splitshp_mp.py calls splitshp_functions.py.
 
@@ -55,7 +55,7 @@ The script is called with
 
 | Example call: 
 
-``python histogramize.py /home/samu/Documents/cropyield/results 10 0.1``
+``python histogramize.py /home/user/Documents/cropyield/results 10 0.1``
 
 
 

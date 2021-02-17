@@ -54,10 +54,12 @@ class UserInput(object):
         self.shapedir = args.shapedir
         self.projectname = args.projectname
         self.bandpath = args.bandpath
+        
         if args.bandlist is None:
             self.bandlist = [2,3,4,5,6,7,8,11,12,13]
         else:
-            self.bandlist = args.bandlist
+            self.bandlist = [int(elem) for elem in args.bandlist]
+        
         self.datadir = args.datadir
         self.idname = args.idname
         self.jobnumber = args.jobnumber

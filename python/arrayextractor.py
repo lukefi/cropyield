@@ -96,7 +96,7 @@ def extractmeta(bandtif, parcelID, mydate, count, projectname, band, tile):
      
     metadatacsv =  os.path.join(projectname,'meta_'+tile + '_' + mydate +'_'+ band+'.csv')
 
-    mycolumns = ['parcelID','year','DOY','tilefilename','missionID','count']
+    mycolumns = ['PlotID','year','DOY','tilefilename','missionID','count']
 
     if not os.path.exists(metadatacsv): # write the header
         with open(metadatacsv,'w') as csvfile:
