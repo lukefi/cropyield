@@ -7,19 +7,19 @@ The data in cropyield/example/cropyield_data is only intended for testing purpos
 
 | According to chapter **Preparation**:
 
-1. Download conda : `` wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh ``
+1. Download conda : ``wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh``
 2. Install above downloaded
-3. Create conda environment with required packages: `` conda env create --file environment.yml ``
-4. Activate above created environment: `` conda activate cropyield ``
+3. Create conda environment with required packages: ``conda env create --file environment.yml``
+4. Activate above created environment: ``conda activate cropyield``
 
 | According to chapter **Usage**:
 
-5. Clone the repository: `` git clone https://github.com/myliheik/cropyield.git ``
-6. Switch into repository directory : `` cd cropyield ``
-7. Switch to example directory: `` cd example/cropyield_data ``
-8. Get the data with: `` wget https://a3s.fi/Sentinel2testCase.tar.zst ``, and unpack with `` tar -I zstd -xvf Sentinel2testCase.tar.zst ``, then switch back to example directory by typing `` cd .. `` twice.
-9. Split test-shapefile based on S2 tiles (here only Finland): `` python ../python/splitshp_mp.py ./Sentinel2testCase/example_parcels.shp ./Sentinel2testCase/Fin_s2.shp ../cropyield_shp``
-10. Start the process (for the example use the start file within example directory) `` bash start.sh ``
+5. Clone the repository: ``git clone https://github.com/myliheik/cropyield.git``
+6. Switch into repository directory : ``cd cropyield``
+7. Switch to example directory: ``cd example/cropyield_data``
+8. Get the data with: ``wget https://a3s.fi/Sentinel2testCase.tar.zst``, and unpack with ``tar -I zstd -xvf Sentinel2testCase.tar.zst``, then switch back to example directory by typing ``cd ..`` twice.
+9. Split test-shapefile based on S2 tiles (here only Finland): ``python ../python/splitshp_mp.py ./Sentinel2testCase/example_parcels.shp ./Sentinel2testCase/Fin_s2.shp ../cropyield_shp``
+10. Start the process (for the example use the start file within example directory) ``bash start.sh``
 11. Check the result files in ./cropyield_results
 
 Resulting files:
