@@ -2,7 +2,11 @@
 
 """
 
-PathFinder creates paths to all files between start- and enddate 
+pathfinder creates paths to all files between start- and enddate within specified dir
+type 'python pathfinder.py -h' for list of possible inputs
+minimum input: -s,-e,-d
+possible useful other input: -b for the bands of interest
+output: file with paths to all files, can be input for arrayextractor.py
 
 """
 import os

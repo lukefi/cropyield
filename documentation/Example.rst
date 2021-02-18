@@ -2,7 +2,7 @@ Example
 ========
 
 Walkthrough for an example case on Linux system:
-The example directory includes randomly drawn polygons (example_parcels.shp) and Sentinel2 tiles over Finland (Fin_s2.shp, derived from xx).
+The example directory includes randomly drawn polygons (example_parcels.shp) and Sentinel2 tiles over Finland (Fin_s2.shp, derived from http://ftpearth.bu.edu/public/emelaas/sentinel2_tiles_world/).
 The data in cropyield/example/cropyield_data is only intended for testing purposes.
 
 | According to chapter **Preparation**:

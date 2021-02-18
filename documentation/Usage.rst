@@ -35,6 +35,17 @@ To run the scripts non parallel eg on workstation, follow the steps below:
 6. check that outputs have been processed
 
 
+Advanced Usage
+---------------
+
+Above described version is the easy access. All scripts withing the python directory can also be used standalone.
+Descriptions of the scripts function and in/outputs can be found in the beginning of the scripts.
+
+For pathfinder.py , argument ``-b`` can be used to give a subset of all bands, that should be processed (as used in the example, to process only band4). If no ``-b`` is given, all bands are processed.
+Use ``python pathfinder.py -h`` or ``python arrayextractor.py -h`` for information on all possible arguments.
+
+
+
 Troubleshooting
 ------------------
 

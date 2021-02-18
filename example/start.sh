@@ -1,5 +1,5 @@
 . ../example/config.config
-echo $startdate
+#echo $startdate
 
 python ../python/pathfinder.py -s $startdate -e $enddate  -d $datapath -b 4
 
