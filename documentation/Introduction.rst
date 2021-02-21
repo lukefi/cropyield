@@ -13,3 +13,6 @@ process is very costly in time and expense. Therefore, for this task, the proces
 pipeline was designed to be used on high performance computing servers. We have used Puhti 
 supercomputer at the governmental CSC IT Centre for Science.
 
+.. image:: WP1-workflow.png
+  :width: 864
+  :alt: Workflow for processing single Sentinel-2 images.
