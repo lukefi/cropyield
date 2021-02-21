@@ -2,7 +2,7 @@ Additional scripts
 ==================
 
 splitshp_x.py
-------------
+--------------
 
 
 This script has to be run separately before running the main script if only one huge shapefile with field parcels is available. It takes three input arguments which are given as command line arguments.
@@ -18,7 +18,7 @@ The script is called with
 
 | Example call:  
 
-``python splitshp_mp.py /home/samu/Documents/cropyield/cropyield.shp /home/samu/Documents/cropyield/Sentinel2_tiles_world.shp /home/samu/Documents/cropyield/results``
+``python splitshp_mp.py /home/user/Documents/cropyield/cropyield.shp /home/user/Documents/cropyield/Sentinel2_tiles_world.shp /home/user/Documents/cropyield/results``
 
 Internally, the splitshp_mp.py calls splitshp_functions.py.
 
@@ -28,7 +28,7 @@ When not using the splitshp.py for splitting, it is essential that the last part
 In some cases it may make sense to first subset the shapefile with the worldwide tiles to the area of interest.
 For this the script ``splitshp_world.py`` can be used. It takes 3 input parameters:
 
-|``pyhton splitshp_world.py [1] [2] [3]``
+| ``pyhton splitshp_world.py [1] [2] [3]``
 
 * [1] a shapefile with polygon/s covering the area of interest,
 * [2] the shapefile with all Sentinel-2 tiles ,
@@ -55,7 +55,7 @@ The script is called with
 
 | Example call: 
 
-``python histogramize.py /home/samu/Documents/cropyield/results 10 0.1``
+``python histogramize.py /home/user/Documents/cropyield/results 10 0.1``
 
 
 

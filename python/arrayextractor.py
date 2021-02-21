@@ -1,3 +1,12 @@
+'''
+
+script to do the array extraction based on userinput
+type 'python arrayextractor.py -h' for list of possible inputs
+minimum input: -f, -shp, -p, -id 
+output: a csv file with pixelvalues within polygons (one row per polygon), polygon shape is not preserved 
+
+'''
+
 import os
 from rasterstats import zonal_stats
 import shapeobject
@@ -96,7 +105,7 @@ def extractmeta(bandtif, parcelID, mydate, count, projectname, band, tile):
      
     metadatacsv =  os.path.join(projectname,'meta_'+tile + '_' + mydate +'_'+ band+'.csv')
 
-    mycolumns = ['parcelID','year','DOY','tilefilename','missionID','count']
+    mycolumns = ['PlotID','year','DOY','tilefilename','missionID','count']
 
     if not os.path.exists(metadatacsv): # write the header
         with open(metadatacsv,'w') as csvfile:
