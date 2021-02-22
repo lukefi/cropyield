@@ -18,7 +18,7 @@ MIT-licensed (see license file in the repository).
 This project was funded by the European Union (grant 831735 — 2018-FI-CROPYIELD).
 
 .. image:: Eurostat_logo_RGB_200.png
-  :width: 400
+  :width: 100
   :alt: Funded by Eurostat.
 
 
