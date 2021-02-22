@@ -22,7 +22,7 @@ This project was funded by the European Union (grant 831735 — 2018-FI-CROPYIEL
   :alt: Funded by Eurostat.
 
 
-Contents:
+
 
 .. toctree::
    :maxdepth: 2
