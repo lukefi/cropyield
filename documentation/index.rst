@@ -15,6 +15,12 @@ The code provided can be used to extract Sentinel-2 pixelvalues per object (poly
 
 MIT-licensed (see license file in the repository).
 
+This project was funded by the European Union (grant 831735 — 2018-FI-CROPYIELD).
+
+.. image:: Eurostat_logo_RGB_200.png
+  :width: 400
+  :alt: Funded by Eurostat.
+
 
 Contents:
 
