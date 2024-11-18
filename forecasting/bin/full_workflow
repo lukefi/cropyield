@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#sleep 57331
+
+# Add scripts location to PATH
+export PATH="$PATH:/projappl/project_2009889/cropyield2024/forecasting/bin"
+
+# UT 2024-07-17
+# Remove environment variables that messes up further jobs
+export -n SLURM_MEM_PER_CPU 
+export -n SLURM_MEM_PER_GPU
+export -n SLURM_MEM_PER_NODE
+
+
+# This checks if the job is run within SLURM: If it is
+## it launches to wait until 7 days for the job to run.
+# it launches to wait until tomorrow for the job to run.
+if [[ $SLURM_JOB_ID -gt 0 ]]; then
+        NEWDATE=$(date  +"%Y-%m-%dT%H:%M:00" -d "02:00 today +1 day")
+        job1=$(sbatch_w -b $NEWDATE 01-splitshp.sh)
+else 
+	job1=$(sbatch_w 01-splitshp.sh)
+fi
+job2=$(sbatch_w --dependency=afterok:$job1 02-sbatch-pathfinder2024.sh)
+echo Launched 01 as jobid $job1 and 02 as jobid $job2
+#From here onwards the submission happens in 02-sbatch-pathfinder2024.sh

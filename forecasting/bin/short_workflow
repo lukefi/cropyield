@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export PATH="$PATH:/projappl/project_2009889/cropyield2024/forecasting/bin"
+
+#job8=$(sbatch_commandlist-silent -commands 07-arrayjob-stackARDkomennot2024.txt -t 00:20:00 -mem 100000)
+#job9=$(sbatch_w --dependency=afterok:$job8 09-predict-allParcels-allCrops-2024-mlflow.sh)
+job9=$(sbatch_w 09-predict-allParcels-allCrops-2024-mlflow.sh)
+job10=$(sbatch_w --dependency=afterok:$job9 10-calculateYields.sh)
+job11=$(sbatch_w --dependency=afterok:$job10 30-sendEmail.sh)
+
+
+#echo Launched 07 $job8, 09 $job9, 10 $job10, and emailing jobid $job11
+echo Launched 09 $job9, 10 $job10, and emailing jobid $job11

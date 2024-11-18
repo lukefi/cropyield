@@ -1,0 +1,237 @@
+#!/bin/bash
+
+mem=8000
+time="12:00:00"
+partition="small"
+jobname="array_job"
+threads=1
+max_jobs=200
+slurm_param=("")
+user=$(whoami)
+starttime=$(date)
+n_rows=0
+project_id="X"
+max_running="x"
+jobidfile=""
+nvme=0
+dependency="0"
+
+#gid=$(pwd | awk -F "/" '{print $3}' | '{print $2}')
+print_help=0
+commandfile=""
+
+if  [[ $# -lt 1 ]]
+then
+  print_help=(1)
+fi
+
+#read the command line arguments
+while [[ $# -ge 1 ]]
+do
+  case "$1" in
+          '-commands')
+          commandfile=($2)
+          shift 
+          shift 
+          ;;       
+          '-mem' | '-m' | '--mem')
+          mem=($2)
+          if [[ ${mem:(-1)} == "G" ]]; then
+                value=${mem::-1}
+                (( mem = value * 1024 ))
+          fi
+          if [[ ${mem:(-1)} == "M" ]]; then
+                 value=${mem::-1}
+                 mem=$value
+          fi
+          if ! [ "$mem" -eq "$mem" ] 2> /dev/null
+          then
+                 echo "Incorrect memory definition."
+                 exit
+          fi
+          shift 
+          shift 
+          ;; 
+          '-t' | '--time')
+          time=($2)
+          shift 
+          shift 
+          ;; 
+          '-p')
+          partition=($2)
+          shift 
+          shift 
+          ;;
+          '-project' | '-A' | '--account' )
+          project_id=($2)
+          shift
+          shift
+          ;;
+          '-jobname' | '-j' | '--jobname' )
+          jobname=($2)
+          shift 
+          shift 
+          ;; 
+          '-threads' | '-c' | '--cores')
+          threads=($2)
+          shift 
+          shift 
+          ;;
+          '-d' | '--tmp' )
+          nvme=$2           
+          shift   
+          shift
+          ;;
+          '-jobid-to-file')
+          jobidfile=($2)
+          shift
+          shift
+          ;;
+          '-max_running' | '--max_running')
+          max_running=$2
+          shift
+          shift
+          ;;
+         '-max_jobs' | '--max_jobs' )
+          max_jobs=$2
+          shift
+          shift
+          ;;
+         '-dependency' )
+          dependency=$2
+          shift
+          shift
+          ;;
+          '-h' | '--help' | '-help')
+          print_help=(1)
+          shift
+          ;;
+          *)
+          if [[ $commandfile == ""  ]]; then
+             commandfile=("$1")
+             shift
+          else
+             echo "Unknown option: $1"
+             exit 1
+          fi    
+          ;;
+  esac
+done
+
+if [[ $project_id == "X" ]]; then
+   if [[ -z "${SCRATCH}" ]]; then
+      project_id=$(pwd | awk -F "/" '{print $3}')
+   else
+      project_id=$( echo $SCRATCH | awk -F "/" '{print $3}')
+   fi
+fi
+
+
+if [[ print_help -eq 1 ]]; then
+cat <<EOF
+sbatch_commandlist executes given command list as independent sub-tasks of an array job.
+Command launches the array job and monitors it job untill the job finishes.
+Syntax:
+
+  sbatch_commandlist -commands list_of_independet_command_lines_to_execute
+
+Optional options:
+  -t, --time     SLURM run time reservation. Default: $time
+  -m, --mem      SLURM memory reservation. Default: $mem
+  -j, --jobname  SLURM job name. Default: array_job
+  -c, --cores    SLURM num-cpus. Default: 1
+  -A, --account  SLURM Accounting project. Default: inferred form the scratch directory where the command is executed.
+  -d, --tmp      Size of job specific $TMPDIR  disk (in GB). 
+                 Default: 0
+  --max_jobs     Maximum number of subjobs to create. Default: $max_jobs
+  --max_running  Maximum number of subjobs that can be running in the same time. Default all.
+  -dependency  Dependencies for the array jobs. Defaults to no dependencies.
+EOF
+exit 0
+fi
+
+if [[ $(groups | grep -w -c $project_id) -ne 1 ]]; then
+   echo ""
+   echo "ERROR: Project $2 not found."
+   echo "Move to the /scratch directory of your project, or define project with option:	-project"
+   exit 1
+fi
+
+
+if [[ -e $commandfile ]]; then
+  n_rows=$(cat $commandfile | wc -l)
+  (( modulo = n_rows / max_jobs + 1 ))
+  if [[ $n_rows -lt 1 ]]
+     then
+        echo "No commands found from file $commandfile"
+        exit 1
+  fi
+  (( n_split = n_rows / modulo ))
+  (( n_split = n_split + 1 ))
+else
+  echo "Command file: $commandfile not found"
+  exit 1
+fi
+
+
+if [[ $max_running == "x" ]]; then
+  max_running=$n_split
+fi
+
+
+cat <<EOF > array_job_$$_tmp.sh
+#!/bin/bash
+#SBATCH -J $jobname
+#SBATCH -o ${jobname}_out_%A_%a_tmp.txt
+#SBATCH -e ${jobname}_err_%A_%a_tmp.txt
+#SBATCH -t $time
+#SBATCH --mem=$mem
+#SBATCH --array=1-${n_split}%${max_running}
+#SBATCH -n 1
+#SBATCH -p $partition
+#SBATCH --nodes=1
+#SBATCH --account=${project_id}
+#SBATCH --cpus-per-task=$threads
+EOF
+
+if [[ $nvme -gt 0 ]]; then
+  echo '#SBATCH  --gres=nvme:'$nvme >> array_job_$$_tmp.sh
+fi
+if [[ $dependency != "0" ]]; then
+  echo '#SBATCH --dependency='$dependency >> array_job_$$_tmp.sh
+fi
+
+cat <<EOF >> array_job_$$_tmp.sh
+(( prev_task = SLURM_ARRAY_TASK_ID - 1 ))
+(( start_task = $modulo * prev_task + 1 ))
+(( end_task = start_task + $modulo -1 ))
+if [[ \$end_task -gt $n_rows ]]
+then 
+  end_task=($n_rows)
+fi
+
+# set input file to be processed
+for rownum in \$(seq \$start_task \$end_task)
+do
+  commandline=\$(sed -n "\$rownum"p $commandfile)
+  echo "\$commandline" | bash
+done
+
+EOF
+#echo "Submitting arrayjob consisting of $n_split sub-tasks"
+#echo "Each subjob executes $modulo commands from the commands listed in file: $commandfile"
+
+
+#launch the array job
+batchjobid=$(sbatch $slurm_param array_job_$$_tmp.sh | grep "Submitted" | awk '{print $4}')
+
+echo "$batchjobid"
+
+if [[ $jobidfile != "" ]]; then
+  echo "Writing $batchjobid to $jobidfile"
+  echo $batchjobid > $jobidfile
+fi
+
+exit 0
+
+

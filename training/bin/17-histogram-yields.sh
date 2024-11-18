@@ -1,0 +1,47 @@
+#!/bin/bash
+#SBATCH --job-name=histo-plot
+#SBATCH --output=plot-out.txt
+#SBATCH --error=plot-err.txt
+#SBATCH --partition=test
+#SBATCH --mem=64G
+#SBATCH --cpus-per-task=1
+#SBATCH --account=project_2009889
+
+module load geoconda
+
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1110-2019-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1110-2018.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1110-2018-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1110-2019.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1110-2018-2019-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1110-2020.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1110-2018-2019-2020-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1110-2021.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1110-2018-2019-2020-2021/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1110-2022.pkl 
+
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1120-2019-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1120-2018.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1120-2018-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1120-2019.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1120-2018-2019-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1120-2020.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1120-2018-2019-2020-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1120-2021.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1120-2018-2019-2020-2021/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1120-2022.pkl 
+
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1230-2019-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1230-2018.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1230-2018-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1230-2019.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1230-2018-2019-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1230-2020.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1230-2018-2019-2020-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1230-2021.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1230-2018-2019-2020-2021/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1230-2022.pkl 
+
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1310-2019-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1310-2018.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1310-2018-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1310-2019.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1310-2018-2019-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1310-2020.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1310-2018-2019-2020-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1310-2021.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1310-2018-2019-2020-2021/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1310-2022.pkl 
+
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1320-2019-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1320-2018.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1320-2018-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1320-2019.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1320-2018-2019-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1320-2020.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1320-2018-2019-2020-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1320-2021.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1320-2018-2019-2020-2021/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1320-2022.pkl 
+
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1400-2019-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1400-2018.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1400-2018-2020-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1400-2019.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1400-2018-2019-2021-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1400-2020.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1400-2018-2019-2020-2022/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1400-2021.pkl 
+python /projappl/project_2009889/cropyield2024/training/python/17-plotYieldHistograms.py -p /scratch/project_2009889/cropyield2024/training/cloudy/predictions/2024-03-17/1400-2018-2019-2020-2021/TCNtest/TCNtestPreds.pkl -i /scratch/project_2009889/cropyield2024/training/cloudy/dataStack_ard/y_1400-2022.pkl 
+
